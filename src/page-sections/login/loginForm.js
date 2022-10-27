@@ -13,14 +13,14 @@ export const LoginForm = () => {
             password: "",
         },
         onSubmit: values => {
-            axios
-              .post("/api/users/login", values)
-              .then((res) => {
-                console.log("token", res?.data?.user?.token);
-                router.push("/");
-              })
-              .catch((err) =>{ console.log(err.response.data.error);
-                setError(err.response.data.error)});
+            // axios
+            //   .post("/api/users/login", values)
+            //   .then((res) => {
+            //     console.log("token", res?.data?.user?.token);
+            //     router.push("/");
+            //   })
+            //   .catch((err) =>{ console.log(err.response.data.error);
+            //     setError(err.response.data.error)});
           }});
   
   

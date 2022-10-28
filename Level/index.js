@@ -8,7 +8,7 @@ const options = {
 };
 
 // Create a database
-const db = new Level('./db', options);
+const db = new Level('./database', options);
 
 // Add multiple entries
 

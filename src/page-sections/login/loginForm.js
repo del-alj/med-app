@@ -3,6 +3,7 @@ import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import { Flex, Form } from "../../styles/componentStyle";
 import { useFormik } from "formik";
+import {login} from "../../pages/api/user";
 
 export const LoginForm = () => {
 
@@ -13,14 +14,11 @@ export const LoginForm = () => {
             password: "",
         },
         onSubmit: values => {
-            // axios
-            //   .post("/api/users/login", values)
-            //   .then((res) => {
-            //     console.log("token", res?.data?.user?.token);
-            //     router.push("/");
-            //   })
-            //   .catch((err) =>{ console.log(err.response.data.error);
-            //     setError(err.response.data.error)});
+           login(values).then((res)=> {
+            console.log("test", res)
+           }).catch((err)=>{
+            setError(err);
+           })
           }});
   
   

@@ -1,8 +1,6 @@
 const { Level } = require("level");
-// const path = require("path");
 const users = require("../src/data/data.js");
 
-// const dbPath = process.env.DB_PATH || path.join(__dirname, "mydb");
 const options = {
   valueEncoding: "json",
 };

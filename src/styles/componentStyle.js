@@ -80,6 +80,26 @@ export const ButtonDiv = styled.button`
   padding: 10px 0px;
   border-radius: 3px;
   border: transparent;
-
-
 `;
+
+export const FlexImages = styled.div`
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+`;
+
+
+export const Image = styled.img`
+  width:150px;
+  height:180px;
+  margin:10px;
+  transition: all 1s;
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;
+
+   :hover{
+    transform:scale(1.1);
+  }
+`;
+

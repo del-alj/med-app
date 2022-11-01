@@ -86,12 +86,14 @@ export const FlexImages = styled.div`
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
+  align-self: center;
+  max-width: 1440px;
 `;
 
 
 export const Image = styled.img`
-  width:150px;
-  height:180px;
+  width:300px;
+  height:400px;
   margin:10px;
   transition: all 1s;
   overflow-x:auto;
@@ -99,7 +101,33 @@ export const Image = styled.img`
   scroll-snap-type:x mandatory;
 
    :hover{
-    transform:scale(1.1);
+    /* transform:scale(1.1); */
   }
 `;
 
+export const LikeDiv = styled.div`
+  /* display: flex;  */
+  justify-content: right; 
+  padding: 10px;
+  position: absolute;
+  top: 10px; 
+  right: 10px;
+
+  /* display: block; */
+  :hover{
+    transform:scale(1.1);
+    display: block;
+
+  }
+`
+
+export const ButtonLike = styled.button`
+  border: none;
+  border-radius: 5px;
+  ${(props) => !props?.like && `background: #f15151;`}
+  svg {
+  padding: 5px 3px 3px 3px;
+  fill: white;
+  ${(props) => props?.like && `fill: black;`}
+  }
+`;

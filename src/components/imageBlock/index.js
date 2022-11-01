@@ -2,6 +2,7 @@
 import { FlexImages, Image } from "../../styles/componentStyle";
 import axios from "axios";
 import { React, useState, useEffect } from "react";
+import { LikeButton } from "../../components/LikeButton"
 import InfiniteScroll from "react-infinite-scroll-component";
 export const ImagesBlock = () => {
     const [pictures, setPictures] = useState([]);
@@ -10,7 +11,7 @@ export const ImagesBlock = () => {
     const handelGetData = async () => {
         await axios
             .get(
-                `https://api.unsplash.com/photos/?client_id=w6egn0aCiqDKj7PeWlV6gajib3rmHtdYnlOW2zT_ydA&page=${page}`
+                `https://api.unsplash.com/photos/?client_id=w6egn0aCiqDKj7PeWlV6gajib3rmHtdYnlOW2zT_ydA&per_page=16&page=${page}`
             )
             .then((response) => {
                 setPictures([...pictures, ...response.data]);
@@ -27,18 +28,22 @@ export const ImagesBlock = () => {
     return (
         <>
             <InfiniteScroll
-                dataLength={pictures.length}
+                dataLength={pictures?.length}
                 next={async () => {
                     await handelGetData()
                 }}
                 style={{ display: 'flex', flexDirection: 'column-reverse' }} //To put endMessage and loader to the top.
                 hasMore={true}
-                loader={<h4>Loading...</h4>}
+                // loader={<h4>Loading...</h4>}
                 scrollableTarget="scrollableDiv"
             >
                 <FlexImages>
+
                     {pictures?.map((elem, index) => {
-                        return <Image src={elem?.urls?.thumb} key={index} />
+                        return <div key={`${index}likebutton`} style={{ position: "relative" }}>
+                            <LikeButton />
+                            <Image src={elem?.urls?.thumb} key={index} />
+                        </div>
                     })}
                 </FlexImages>
             </InfiniteScroll>

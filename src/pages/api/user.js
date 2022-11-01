@@ -1,7 +1,6 @@
 
 import { getUser } from "../../modules/user.js"
 import { sign } from 'jsonwebtoken';
-import { NextApiRequest, NextApiResponse } from 'next';
 
 export const login = async (values) => {
     

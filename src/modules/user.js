@@ -1,10 +1,13 @@
 
-import db from "../../Level/index";
+import {db} from "../../Level/index.js";
 
 export const getUser = (name) => {
-    return db.get(name).then((res) => {
+    console.log("//////////", res)
+    return db?.get(name).then((res) => {
+
         return (res);
     }).catch((err) => {
+        console.log("///ee//////", err)
         return (err);
     });
 }

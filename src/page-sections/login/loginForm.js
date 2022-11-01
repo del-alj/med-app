@@ -6,47 +6,37 @@ import { useFormik } from "formik";
 import { login } from "../../pages/api/user";
 import { verify } from 'jsonwebtoken';
 
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import {signIn } from 'next-auth/react';
+import { authValid } from "../../helpers/auth";
 
 export const LoginForm = () => {
-
-    const [path, setPath] = useState("");
-    const router = useRouter();
-
-    useEffect(() => {
-        if (path === "/")
-            router?.push(path)
-    }, [path])
-    const authValid = () => {
-
-        const token = localStorage.getItem("authToken")
-        if (token) {
-            verify(token, "0e900be1-0ac5-4e6a-bf4b-38f8b21a189b", (err, data) => {
-                if (err) setPath("/ok")
-                else {
-                    setPath("/");
-                }
-            });
-
-        }
-    }
-    // if (path === "/")
-    //     router?.push(path)
-
     const [error, setError] = useState(null);
+    const router = useRouter();
     const formik = useFormik({
         initialValues: {
             username: "",
             password: "",
         },
         onSubmit: async (values) => {
-            login(values).then((res) => {
-                authValid(setPath)
+            // signIn();
+            // login(values).then((res) => {
+            //     authValid(setPath)
+            signIn("credentials", {
+                redirect: false,
+                username: values?.username,
+                password: values?.password,
+            }).then((res) => {
+                
+                authValid(setPath);
+                console.log(res)
+                // router.replace("/");
             }).catch((err) => {
                 setError(err);
             })
         }
     });
+
 
     return (<Flex>
         <h1 className="display-6 mb-3">Welcome back</h1>

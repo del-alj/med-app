@@ -5,7 +5,7 @@ import { Flex, Form } from "../../styles/componentStyle";
 import { useFormik } from "formik";
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { Eggy } from '@s-r0/eggy-js';
+import { Eggy } from '../../../node_modules/@s-r0/eggy-js/build/js/eggy.js';
 
 export const LoginForm = () => {
     const router = useRouter();
@@ -20,7 +20,7 @@ export const LoginForm = () => {
                 password: values?.password,
                 redirect: false,
             });
-            if (res.error) {
+            if (res?.error) {
                 await Eggy({
                     title: "Error",
                     message: res.error,

@@ -7,7 +7,7 @@ import { login } from "../../pages/api/user";
 import { verify } from 'jsonwebtoken';
 
 import { useRouter } from 'next/router';
-import {signIn } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { authValid } from "../../helpers/auth";
 
 export const LoginForm = () => {
@@ -22,18 +22,18 @@ export const LoginForm = () => {
             // signIn();
             // login(values).then((res) => {
             //     authValid(setPath)
-            signIn("credentials", {
-                redirect: false,
+            const res = await signIn("login", {
                 username: values?.username,
                 password: values?.password,
-            }).then((res) => {
-                
-                authValid(setPath);
-                console.log(res)
-                // router.replace("/");
-            }).catch((err) => {
-                setError(err);
-            })
+                redirect: false,
+            });
+
+            if (res.error) return;
+            // authValid(setPath);
+            console.log("done", res)
+            router.replace("/");
+
+
         }
     });
 

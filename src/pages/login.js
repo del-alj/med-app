@@ -3,9 +3,6 @@ import React from "react";
 import { LoginForm } from "../page-sections/login/loginForm";
 import {Container, Block, Img} from "../styles/componentStyle";
 
-import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "./api/auth/[...nextauth]";
-
 export default function Login() {
     return (
         <Container>
@@ -17,21 +14,4 @@ export default function Login() {
             </Block>
         </Container>
     );
-}
-
-export async function getServerSideProps({ req, res }) {
-  const session = await unstable_getServerSession(req, res, authOptions);
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
 }

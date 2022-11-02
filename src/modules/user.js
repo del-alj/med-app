@@ -1,13 +1,18 @@
 
-import {db} from "../../Level/index.js";
+import { database } from "../../Level/index.js";
 
-export const getUser = (name) => {
-    console.log("//////////", res)
-    return db?.get(name).then((res) => {
+export async function login(credentials) {
 
-        return (res);
-    }).catch((err) => {
-        console.log("///ee//////", err)
-        return (err);
-    });
+    const dbusers = await database();
+
+    return dbusers.get(credentials?.username)
+        .then((res) => {
+            if (!res) throw new Error(404);
+            if (res.password !== credentials.password) { throw new Error("Informations de connexion invalides"); }
+            if (res.isActive === false) throw new Error("Ce compte a été bloqué.");
+            return { status: 200, name: res.name, username: res.username };
+        })
+        .catch((err) => {
+            return { err };
+        });
 }

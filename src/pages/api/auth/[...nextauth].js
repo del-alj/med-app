@@ -1,38 +1,45 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { getUser } from "../../../modules/user"
-import { sign } from 'jsonwebtoken';
-import db from "../../../../Level/index";
 
-export const authOptions = {
+import * as Auth from "../../../modules/user";
+
+export default NextAuth({
   providers: [
     CredentialsProvider({
+      id: "login",
+      name: "Login",
+      type: "credentials",
       async authorize(credentials) {
+        return await Auth.login(credentials).catch((res) => {
+          return res;
 
-        //get user
-        const name = credentials?.username;
-        db.open("users");
-        db?.get(name).then((res)=> {console.log("55555555555", res)}).catch((err)=>{console.log("err", err)})
-        const test = await getUser(name);
-        console.log("*******11******", test)
-        // await getUser(name).then((res) => {
-        //   console.log("*******11******", res)
-        //     if (res?.password === credentials?.password && res?.isActive) {
-        //         const jwt = sign(res, "0e900be1-0ac5-4e6a-bf4b-38f8b21a189b", { expiresIn: '7d' });
-        //         localStorage.setItem( "authToken", jwt );
-        //         return ({ authToken: jwt });
-        //     } else if (res?.password === credentials?.password && !res?.isActive)
-        //         throw new Error('Unauthorized access : user Bloked');
-        //     else
-        //     throw new Error('Unauthorized access: bad password');
-        // }).catch((err) => {
-        //   console.log("csrfToken")
-        //     throw new Error('Unauthorized access: user does not exist');
-        // });
-        // return null;
+        })
+          .catch((error) => {
+            throw new Error(error.message);
+          })
       },
     }),
   ],
-};
+  callbacks: {
+    async signIn(res) {
+      if (res?.user?.err) {
+        if (res?.user?.err?.message === "NotFound:") {
+          console.log("error", " user not found")
+        }
+        else console.log("error", res?.user?.err?.message)
+        return false;
+      }
 
-export default NextAuth(authOptions);
+      return true;
+    },
+    async session({ session }) {
+      session.user.isLoggedIn = true;
+      return session;
+    },
+    async jwt({ token, user }) {
+      return token;
+    },
+  },
+  // use env variable in production
+  secret: "looselipssinkships",
+});

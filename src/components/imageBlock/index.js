@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 
 import { FlexImages, Image } from "../../styles/componentStyle";
 import axios from "axios";
@@ -21,10 +22,11 @@ export const ImagesBlock = () => {
                 console.log("error", error);
             });
     }
+    
     useEffect(() => {
         handelGetData()
     }, [])
-    console.log("page", page)
+    
     return (
         <div style={{ paddingTop: "73px", background: "#fff"}}>
             <InfiniteScroll
@@ -32,9 +34,8 @@ export const ImagesBlock = () => {
                 next={async () => {
                     await handelGetData()
                 }}
-                style={{ display: 'flex', flexDirection: 'column-reverse' }} //To put endMessage and loader to the top.
+                style={{ display: 'flex', flexDirection: 'column-reverse' }}
                 hasMore={true}
-                // loader={<h4>Loading...</h4>}
                 scrollableTarget="scrollableDiv"
             >
                 <FlexImages>

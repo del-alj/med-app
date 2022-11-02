@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import Head from 'next/head';
 import { Header } from "../components/header";
 import { ImagesBlock } from "../components/imageBlock";
-import {ContainerDiv} from "../styles/componentStyle";
+import { ContainerDiv } from "../styles/componentStyle";
 
 
 export default function Home() {

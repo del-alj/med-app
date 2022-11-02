@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import { Flex, Form } from "../../styles/componentStyle";
 import { useFormik } from "formik";
-
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
+import { Eggy } from '@s-r0/eggy-js';
 
 export const LoginForm = () => {
     const router = useRouter();
@@ -20,8 +20,14 @@ export const LoginForm = () => {
                 password: values?.password,
                 redirect: false,
             });
-
-            if (res.error) return;
+            if (res.error) {
+                await Eggy({
+                    title: "Error",
+                    message: res.error,
+                    type: 'error',
+                });
+                return;
+            }
             router.replace("/");
         }
     });

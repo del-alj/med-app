@@ -14,7 +14,8 @@ export default NextAuth({
           return res;
         })
           .catch((error) => {
-            throw new Error(error.message);
+            console.log(error.message)
+            return (error);
           })
       },
     }),
@@ -22,11 +23,10 @@ export default NextAuth({
   callbacks: {
     async signIn(res) {
       if (res?.user?.err) {
-        if (res?.user?.err?.message === "NotFound:") {
-          console.log("error", " user not found")
-        }
-        else console.log("error", res?.user?.err?.message)
-        return false;
+        if (res?.user?.err?.message === "NotFound:")
+          throw new Error(" user not found")
+        else
+          throw new Error(res?.user?.err?.message)
       }
 
       return true;
@@ -39,6 +39,6 @@ export default NextAuth({
       return token;
     },
   },
-  // use env variable in production
+  
   secret: "looselipssinkships",
 });

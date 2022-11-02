@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@s-r0/eggy-js": "^1.3.4",
     "axios": "^1.1.3",
     "formik": "^2.2.9",
-    "jsonwebtoken": "^8.5.1",
     "level": "^8.0.0",
     "next": "13.0.0",
     "next-auth": "^4.15.0",

@@ -1,8 +1,7 @@
 
 import { ButtonLike, LikeDiv } from "../../styles/componentStyle";
-import axios from "axios";
-import { React, useState, useEffect } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { React, useState } from "react";
+
 export const LikeButton = () => {
     const [like, setLike] = useState(true);
 

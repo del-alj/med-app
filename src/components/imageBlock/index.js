@@ -26,7 +26,7 @@ export const ImagesBlock = () => {
     }, [])
     console.log("page", page)
     return (
-        <>
+        <div style={{ paddingTop: "73px", background: "#fff"}}>
             <InfiniteScroll
                 dataLength={pictures?.length}
                 next={async () => {
@@ -47,6 +47,6 @@ export const ImagesBlock = () => {
                     })}
                 </FlexImages>
             </InfiniteScroll>
-        </>
+        </div>
     )
 }

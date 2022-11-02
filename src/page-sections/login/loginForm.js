@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import { Flex, Form } from "../../styles/componentStyle";
 import { useFormik } from "formik";
-import { login } from "../../pages/api/user";
-import { verify } from 'jsonwebtoken';
 
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { authValid } from "../../helpers/auth";
 
 export const LoginForm = () => {
-    const [error, setError] = useState(null);
     const router = useRouter();
     const formik = useFormik({
         initialValues: {
@@ -19,9 +15,6 @@ export const LoginForm = () => {
             password: "",
         },
         onSubmit: async (values) => {
-            // signIn();
-            // login(values).then((res) => {
-            //     authValid(setPath)
             const res = await signIn("login", {
                 username: values?.username,
                 password: values?.password,
@@ -29,17 +22,12 @@ export const LoginForm = () => {
             });
 
             if (res.error) return;
-            // authValid(setPath);
-            console.log("done", res)
             router.replace("/");
-
-
         }
     });
 
-
     return (<Flex>
-        <h1 className="display-6 mb-3">Welcome back</h1>
+        <h1>Welcome back</h1>
         <p>Welcome back! Please enter your details.</p>
         <Form onSubmit={formik.handleSubmit}>
             <Input id="username" label={"UserName"} placeholder="Username" type="text" onChange={formik.handleChange}

@@ -5,7 +5,7 @@ export const Input = ({ id, placeholder, type, label, onChange, value }) => {
     return (
         <InputDiv >
             <label>{label}</label>
-            <input className="form-control" id={id} name={id} placeholder={`Enter your ${placeholder}`} type={type} onChange={onChange}
+            <input id={id} name={id} placeholder={`Enter your ${placeholder}`} type={type} onChange={onChange}
          value={value}/>
         </InputDiv>
     )

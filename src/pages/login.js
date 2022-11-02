@@ -1,9 +1,22 @@
 import React from "react";
-
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import { LoginForm } from "../page-sections/login/loginForm";
 import {Container, Block, Img} from "../styles/componentStyle";
 
 export default function Login() {
+    const { data, status } = useSession();
+    const router = useRouter();
+  
+    if (status === "loading") {
+      /**
+       * Session is being fetched
+       */
+      return <div>Loading...</div>;
+    }
+    if (status === "authenticated") {
+        router.push("/");
+      }
     return (
         <Container>
             <Block >

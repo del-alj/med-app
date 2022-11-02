@@ -12,7 +12,6 @@ export default NextAuth({
       async authorize(credentials) {
         return await Auth.login(credentials).catch((res) => {
           return res;
-
         })
           .catch((error) => {
             throw new Error(error.message);

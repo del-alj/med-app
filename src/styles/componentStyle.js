@@ -99,6 +99,7 @@ export const Image = styled.img`
   overflow-x:auto;
   overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;
+  border-radius: 17px;
 
    :hover{
     /* transform:scale(1.1); */
@@ -130,4 +131,47 @@ export const ButtonLike = styled.button`
   fill: white;
   ${(props) => props?.like && `fill: black;`}
   }
+`;
+
+export const HeadDiv = styled.header`
+
+background-color: #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  /* position: fixed; */
+  max-width: 1440px;
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-self: center;
+  max-width: 1440px;
+
+`;
+
+export const Logo = styled.div`
+  display: block;
+  float: left;
+  font-size: 1.5em;
+  padding: 10px 20px;
+  text-decoration: none;
+
+`;
+
+export const Button = styled.button`
+  margin-right: 50px;
+  align-self: center;
+  cursor: pointer;
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+  border: transparent;
+
+`;
+
+export const ContainerDiv = styled.div`
+display: flex;
+flex-direction: column;
 `;
